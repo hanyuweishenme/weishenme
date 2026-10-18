@@ -126,7 +126,11 @@ function doRegister(){
   toast('ยินดีต้อนรับ คุณ'+name+'! AI กำลังจัดแผนการเรียนให้คุณ');
   /* สมัครบัญชีคลาวด์ (Supabase) คู่กัน — sync ข้อมูลข้ามเครื่อง */
   if(typeof sbConfigured === 'function' && sbConfigured()){
-    sbSignUp(email, pwd, {name: name}).then(function(){
+    sbSignUp(email, pwd, {name: name}).then(function(res){
+      if(res && res.error){
+        toast('⚠️ คลาวด์: ' + (res.error.message || 'สมัครคลาวด์ไม่สำเร็จ'));
+        return;
+      }
       sbLoadProfile().then(function(p){ if(p) sbApplyProfile(u, p); });
     });
   }
@@ -143,7 +147,10 @@ function doLogin(){
   /* เข้าสู่ระบบคลาวด์คู่กัน → โหลดโปรไฟล์ล่าสุดจากคลาวด์ */
   if(typeof sbConfigured === 'function' && sbConfigured()){
     sbSignIn(email, pwd).then(function(res){
-      if(res && res.error){ return; }
+      if(res && res.error){
+        toast('⚠️ คลาวด์: ' + (res.error.message || 'เข้าสู่ระบบคลาวด์ไม่สำเร็จ'));
+        return;
+      }
       sbLoadProfile().then(function(p){ if(p){ sbApplyProfile(u, p); renderUserChip(); } });
     });
   }
