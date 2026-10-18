@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>为什么中文 · เรียนภาษาจีนด้วยคำถาม</title>
+<meta name="description" content="为什么中文 — เรียนภาษาจีนด้วยคำถาม คอร์สพินอิน ข้อสอบจำลอง HSK 1–6 เขียนอักษรจีนพร้อมลำดับขีด บทความสั้น เกมภาษาแบบด่าน และระบบสมาชิกพรีเมียมสำหรับผู้เรียนชาวไทย">
+<link rel="icon" href="assets/favicon.png?v=20260101ad">
+<link rel="apple-touch-icon" href="assets/favicon-256.png?v=20260101ad">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=LXGW+WenKai+TC:wght@400;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=20260101ad">
+<link rel="stylesheet" href="assets/glass.css?v=20260101ad">
+</head>
+<body data-page="home">
+
+<!-- ==================== BACKGROUND: paper, clouds, ancient glyphs ==================== -->
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-paper"></div>
+
+  <!-- brush-stroke clouds -->
+  <div class="cloud c1">
+    <svg viewBox="0 0 420 150" fill="currentColor">
+      <path d="M18 104c14-30 44-47 76-42 8-25 33-41 60-38 26 3 47 22 51 47 27-3 52 12 60 37 5 15-2 30-15 37-11 6-25 5-36-1-14 9-34 10-49 2-16 10-39 10-55-1-19 8-42 4-55-12-8-9-11-20-7-29z" opacity=".55"/>
+      <path d="M60 132c40 9 96 12 148 4 40-6 82-18 112-34 4-2 7 2 3 5-30 19-74 32-116 38-52 8-108 5-148-6-5-2-3-8 1-7z" opacity=".4"/>
+    </svg>
+  </div>
+  <div class="cloud c2">
+    <svg viewBox="0 0 420 150" fill="currentColor">
+      <path d="M22 96c10-26 38-42 66-38 10-22 34-35 58-31 24 4 42 24 43 47 24 0 45 16 50 39 3 15-6 29-20 34-11 4-23 1-32-6-15 7-34 6-47-3-15 8-35 6-48-5-17 6-36 0-45-14-5-8-6-16-5-23z" opacity=".6"/>
+      <path d="M70 124c44 6 92 4 132-6 30-8 58-20 78-34 4-3 8 2 3 5-24 17-56 30-90 38-42 10-92 11-136 4-5-1-4-8 1-7z" opacity=".35"/>
+    </svg>
+  </div>
+  <div class="cloud c3">
+    <svg viewBox="0 0 420 150" fill="currentColor">
+      <path d="M14 100c16-32 50-50 84-44 6-24 30-41 56-39 27 2 49 22 53 48 29-2 54 15 60 41 4 16-5 31-19 37-12 5-26 2-35-6-16 10-38 10-54 0-17 9-39 7-54-4-20 9-45 3-58-14-6-8-8-13-33-19z" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="cloud c4">
+    <svg viewBox="0 0 420 150" fill="currentColor">
+      <path d="M30 92c12-24 40-37 66-32 9-20 31-32 53-29 22 3 39 21 41 43 22 1 41 16 45 37 3 14-6 27-19 31-10 3-21 0-29-6-14 6-31 5-43-3-14 7-32 5-44-5-15 5-33-1-41-14-4-7-5-14-29-22z" opacity=".55"/>
+    </svg>
+  </div>
+  <div class="cloud c5">
+    <svg viewBox="0 0 420 150" fill="currentColor">
+      <path d="M24 98c14-28 45-44 76-40 8-23 32-38 57-35 25 3 44 21 48 45 26-2 49 14 55 38 4 15-4 29-18 34-11 4-23 1-32-6-15 8-35 8-50-1-16 9-37 8-51-3-18 8-41 2-53-13-6-8-9-16-32-19z" opacity=".5"/>
+    </svg>
+  </div>
+
+  <!-- floating ancient / traditional characters -->
+  <div class="ancients" id="ancients"></div>
+</div>
+
+<!-- ==================== NAV ==================== -->
+<header class="nav" id="topnav">
+  <div class="nav-in">
+    <div class="brand" onclick="go('home')">
+      <div class="logo"><img src="assets/logo-why-chinese.png?v=20260101ad" alt="为什么中文"></div>
+      <div class="brand-txt">
+        <strong>为什么中文</strong>
+        <span>Wèi shénme Zhōngwén</span>
+      </div>
+    </div>
+
+    <nav class="menu" id="menu">
+      <a data-page="home" onclick="go('home')">หน้าแรก</a>
+      <a data-page="learn" onclick="go('learn')">เริ่มเรียน</a>
+      <a data-page="articles" onclick="go('articles')">บทความ</a>
+      <a data-page="hsk" onclick="go('hsk')">HSK</a>
+      <a data-page="games" onclick="go('games')">เกมภาษา</a>
+      <a data-page="chars" onclick="go('chars')">อักษรจีน</a>
+      <a data-page="shop" onclick="go('shop')">ร้านค้า</a>
+      <a data-page="premium" onclick="go('premium')">พรีเมียม</a>
+    </nav>
+
+    <div class="nav-right">
+      <div id="navBanner"></div>
+      <div id="userChip" class="user-chip" onclick="go('profile')"></div>
+      <button class="icon-btn-nav" id="navAdminBtn" title="หลังบ้าน" onclick="go('admin')"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      <button class="hamb" title="เมนู" aria-label="เปิดเมนู" onclick="document.getElementById('menu').classList.toggle('open')"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- ==================== PAGES ==================== -->
+<main id="app">
+
+  <!-- ============ HOME ============ -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <span class="lantern l1"><i></i></span>
+      <span class="lantern l2"><i></i></span>
+      <span class="lantern l3"><i></i></span>
+      <span class="lantern l4"><i></i></span>
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> เรียนจีนด้วยคำถาม · ตั้งแต่พินอินถึง HSK 6</div>
+            <h1 class="hero-title">
+              <span class="cn">为什么？</span>
+              ถามให้เป็น<br>เรียนจีนให้เข้าใจ
+            </h1>
+            <p class="lead">
+              “为什么中文” คือพื้นที่เรียนภาษาจีนสำหรับคนไทย — เริ่มจากพินอินและคำถามง่าย ๆ
+              ไล่ไปจนถึงข้อสอบจำลอง HSK 100 ข้อ เกมแบบด่าน และการเขียนอักษรจีนพร้อมลำดับขีดที่ใช้จริงทุกวัน
+            </p>
+            <div class="btn-row">
+              <button class="btn btn-primary" onclick="go('learn')">เริ่มเส้นทางการเรียน →</button>
+              <button class="btn btn-ghost" onclick="go('games')"><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg> เล่นเกมภาษาจีน</button>
+            </div>
+            <div class="hero-meta">
+              <div><b id="hmChars">3,000</b><span>อักษรจีนที่ใช้บ่อย</span></div>
+              <div><b id="hmWords">0</b><span>คำศัพท์ HSK</span></div>
+              <div><b id="hmArticles">0</b><span>บทความสั้น</span></div>
+              <div><b>6</b><span>ชุดข้อสอบ HSK</span></div>
+            </div>
+          </div>
+
+          <div class="hero-art">
+            <div class="art-ring r3"></div>
+            <div class="art-ring r1"></div>
+            <div class="art-ring r2"></div>
+            <div class="art-core"><span>為</span></div>
+            <div class="art-badge ab1"><i><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></i> บทความ + พินอิน</div>
+            <div class="art-badge ab2"><i><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg></i> เกมแบบด่าน Level</div>
+            <div class="art-badge ab3"><i><svg class="icn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3.5h3M7.5 7h9M12 10 9 20M12 10l3.5 10"/></svg></i> เขียนอักษร 440 ตัว</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- continue learning (only when logged in) -->
+    <div class="section tight" id="homeContinue" style="display:none">
+      <div class="wrap" id="homeContinueBox"></div>
+    </div>
+
+    <div class="section tight">
+      <div class="wrap">
+        <div class="stats reveal">
+          <div class="stat"><b data-count="3000">0</b><span>อักษรจีน常用字</span></div>
+          <div class="stat"><b data-count="6">0</b><span>ชุดข้อสอบ HSK</span></div>
+          <div class="stat" id="statWords"><b data-count="0">0</b><span>คำศัพท์พร้อมเรียน</span></div>
+          <div class="stat" id="statArticles"><b data-count="0">0</b><span>บทความ &amp; บทสนทนา</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="kicker">Learning Paths</div>
+          <h2>เลือกเส้นทางที่ใช่ <em>สำหรับคุณ</em></h2>
+          <p>แต่ละโซนมีหน้าหลักของตัวเอง — เข้าไปดูว่าข้างในมีอะไร แล้วค่อยเลือกว่าจะฟัง อ่าน เขียน หรือสอบก่อน</p>
+        </div>
+        <div class="hub-grid g2" id="homeHubs"></div>
+      </div>
+    </div>
+
+    <div class="section alt">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="kicker">HSK Roadmap</div>
+          <h2>จากศูนย์ถึง <em>HSK 6</em></h2>
+          <p>รู้หรือไม่ว่าตอนนี้คุณอยู่ระดับไหน และอีกไกลแค่ไหนกว่าจะถึงเป้าหมาย</p>
+        </div>
+        <div id="homeHskStrip"></div>
+        <div style="text-align:center;margin-top:30px">
+          <button class="btn btn-ghost" onclick="go('hsk')">ดูรายละเอียดทุกระดับ →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="kicker">Daily Chinese</div>
+          <h2 id="dailyHeading">คำศัพท์ประจำวัน</h2>
+          <p id="dailySub">วันละคำ ก็ยังดีกว่าไม่ได้เรียน — กลับมาทุกวันเพื่อเก็บแต้มสะสม</p>
+        </div>
+        <div id="homeDailyWord"></div>
+      </div>
+    </div>
+
+    <div class="section alt">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="kicker">Reading</div>
+          <h2>บทความน่าสนใจ <em>อ่านเพลิน ๆ</em></h2>
+          <p>บทสนทนา เรื่องเล่าสั้น และวัฒนธรรมจีน พร้อมพินอินกับคำแปลไทยครบทุกบท</p>
+        </div>
+        <div class="article-list" id="homeArticles"></div>
+        <div style="text-align:center;margin-top:30px">
+          <button class="btn btn-primary" onclick="go('articles')">ดูบทความทั้งหมด →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <div class="kicker">Why here</div>
+          <h2>ทำไมต้องเรียนที่ <em>为什么中文</em></h2>
+        </div>
+        <div class="cards" id="homeFeatures"></div>
+      </div>
+    </div>
+
+    <div class="section tight">
+      <div class="wrap">
+        <div class="continue-card reveal">
+          <div class="ic"><svg class="icn" style="width:30px;height:30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3.5h6M12 3.5V5"/><ellipse cx="12" cy="11.5" rx="5" ry="6.5"/><path d="M12 18v2M10.5 20h3M12 8.2v6.6M8.6 9.4c1.9 2.3 4.9 2.3 6.8 0"/></svg></div>
+          <div class="txt">
+            <b>สมัครบัญชีเพื่อเก็บความก้าวหน้า</b>
+            <span>สะสมแต้ม บันทึกบทความที่อ่าน สอบเก็บคะแนน แล้วปลดล็อกด่านเกมที่ยากขึ้นเรื่อย ๆ</span>
+          </div>
+          <button class="btn btn-primary" onclick="go('login')">สมัคร / เข้าสู่ระบบ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEARN HUB ============ -->
+  <section class="page" id="page-learn">
+    <div class="page-hero">
+      <div class="cn-watermark">學</div>
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>เริ่มเรียน</span></div>
+        <h1 class="cn-title">เริ่มเรียน从这里开始</h1>
+        <p class="sub">เส้นทางการเรียนทีละขั้นตั้งแต่ศูนย์ถึง HSK 6 พร้อมคอร์สพินอินสำหรับผู้เริ่มต้น — ระบบบันทึกความคืบหน้าของคุณในทุกขั้น</p>
+      </div>
+    </div>
+
+    <div class="section tight">
+      <div class="wrap">
+        <div class="mini-stat-row reveal" id="learnStats"></div>
+        <div class="hsk-mode-tabs" id="learnModeTabs" style="margin-top:6px"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="wrap">
+        <div id="learnRoadmapWrap">
+          <div class="sec-head reveal" style="margin-bottom:28px">
+            <div class="kicker">Learning Roadmap</div>
+            <h2>เส้นทางการเรียน <em>ทีละขั้น</em></h2>
+            <p>6 ขั้นตอนจากศูนย์ถึง HSK 6 — ระบบบันทึกสิ่งที่คุณเรียนในแต่ละขั้น และประเมินระดับความชำนาญให้อัตโนมัติ</p>
+          </div>
+          <div id="learnSummary"></div>
+          <div class="roadmap" id="learnRoadmap"></div>
+        </div>
+        <div id="learnPinyinWrap" style="display:none">
+          <div id="pinyinHub"></div>
+          <div id="pinyinPlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ARTICLES HUB ============ -->
+  <section class="page" id="page-articles">
+    <div class="page-hero">
+      <div class="cn-watermark">讀</div>
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>บทความ</span></div>
+        <h1 class="cn-title">บทความสั้น · 短文阅读</h1>
+        <p class="sub">ห้องสมุดบทอ่านภาษาจีนสำหรับคนไทย — บทความสั้น 3 ชั้น (จีน/พินอิน/ไทย) และบล็อกเคล็ดลับการเรียนจากทีม สลับแท็บได้เลย</p>
+      </div>
+    </div>
+    <div class="section tight">
+      <div class="wrap">
+        <div class="hsk-mode-tabs" id="artModeTabs" style="margin:18px auto 26px"></div>
+        <div id="articleWrap">
+          <div id="articleCats"></div>
+
+          <div class="char-toolbar" style="top:74px">
+            <input class="search-in" id="artSearch" placeholder="🔍 ค้นหาบทความ เช่น การทักทาย, อาหาร, 你好" oninput="renderArticleList()">
+            <div class="char-filters" id="artLevelFilter"></div>
+          </div>
+
+          <div class="article-list" id="articleList"></div>
+          <div class="empty" id="articleEmpty" style="display:none"><span class="ic">🔍</span>ไม่พบบทความที่ตรงกับคำค้น</div>
+        </div>
+        <div id="blogWrap" style="display:none">
+          <div id="blogView"></div>
+        </div>
+        <div id="dlgArea" style="display:none"><div id="dlgHub"></div><div id="dlgView"></div></div>
+        <div id="historyBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ARTICLE READER ============ -->
+  <section class="page" id="page-article">
+    <div class="section">
+      <div class="wrap-n">
+        <div id="articleReader"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HSK HUB ============ -->
+  <section class="page" id="page-hsk">
+    <div class="page-hero">
+      <div class="cn-watermark">考</div>
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>HSK</span></div>
+        <h1 class="cn-title">ระดับ HSK · 汉语水平考试</h1>
+        <p class="sub">ระบบคลังคำศัพท์แยกตามระดับ HSK 1–6 พร้อมพินอิน คำอ่านไทย และความหมาย — เลือกระดับที่เหมาะกับคุณ</p>
+      </div>
+    </div>
+    <div class="section tight">
+      <div class="wrap">
+        <div class="hsk-mode-tabs" id="hskModeTabs"></div>
+        <div id="hskVocabWrap">
+          <div id="hskProgressBox"></div>
+          <div class="hsk-tabs" id="hskTabs"></div>
+          <div id="hskPanels"></div>
+        </div>
+        <div id="hskExamWrap" style="display:none">
+          <div id="examsHub"></div>
+          <div id="examPlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HSK LEVEL DETAIL ============ -->
+  <section class="page" id="page-hsklevel">
+    <div class="section">
+      <div class="wrap">
+        <div id="hskLevelDetail"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GAMES HUB ============ -->
+  <section class="page" id="page-games">
+    <div class="page-hero">
+      <div class="cn-watermark">玩</div>
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>เกมภาษา</span></div>
+        <h1 class="cn-title">เกมภาษาจีน · 语言游戏</h1>
+        <p class="sub">เลือกเกมที่อยากเล่น แต่ละเกมมีด่านของตัวเอง เริ่มจากง่ายแล้วไล่ขึ้นไปจนถึง HSK 6</p>
+      </div>
+    </div>
+    <div class="section tight">
+      <div class="wrap">
+        <div id="gamesProgressBox"></div>
+        <div id="gamesChartBox" style="margin-bottom:28px"></div>
+        <div class="hub-grid g3" id="gameHubs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GAME LEVELS ============ -->
+  <section class="page" id="page-gamelevels">
+    <div class="section">
+      <div class="wrap">
+        <div id="gameLevelsView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GAME PLAY ============ -->
+  <section class="page" id="page-gameplay">
+    <div class="section tight">
+      <div class="wrap">
+        <div id="gamePlayView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHARACTERS HUB ============ -->
+  <section class="page" id="page-chars">
+    <div class="page-hero">
+      <div class="cn-watermark">字</div>
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>อักษรจีน</span></div>
+        <h1 class="cn-title">อักษรจีน 3,000 ตัว · 常用字</h1>
+        <p class="sub">
+          รวมอักษรจีนที่ใช้บ่อยที่สุด 3,000 ตัว เรียงตาม <b>通用规范汉字表</b> (ตารางอักษรจีนมาตรฐานทั่วไป)
+          一级字表 ของกระทรวงศึกษาธิการจีน — เรียงตามลำดับความถี่การใช้จริง
+        </p>
+      </div>
+    </div>
+    <div class="section tight">
+      <div class="wrap">
+        <div id="charsIntro"></div>
+      </div>
+    </div>
+    <div class="section tight" style="padding-top:0">
+      <div class="wrap">
+        <div class="hsk-mode-tabs" id="charModeTabs" style="margin-top:6px"></div>
+        <div id="charListWrap">
+          <div id="charProgress" style="margin-bottom:16px"></div>
+          <div class="char-toolbar">
+            <input class="search-in" id="charSearch" placeholder="🔍 พิมพ์ตัวอักษรจีน พินอิน หรือความหมายไทย" oninput="onCharSearch()">
+            <button class="chip" onclick="toggleCharMode()" id="charModeBtn">⇄ สลับโหมดค้นหา</button>
+            <button class="chip" onclick="toggleLearnedOnly()" id="charLearnedBtn">✓ ซ่อนตัวที่จำได้แล้ว</button>
+          </div>
+          <div class="char-count" id="charCount"></div>
+          <div class="char-grid" id="charGrid"></div>
+          <div class="load-more"><button class="btn btn-ghost" id="charMoreBtn" onclick="loadMoreChars()">แสดงเพิ่มอีก 300 ตัว</button></div>
+        </div>
+        <div id="charsWriteTab"></div>
+        <div id="charsBasicTab"></div>
+        <div id="charsCompTab"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WRITING PRACTICE ============ -->
+  <section class="page" id="page-write">
+    <div class="section tight" style="padding-top:30px">
+      <div class="wrap">
+        <div id="writeView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CUSTOM PAGE (page builder) ============ -->
+  <section class="page" id="page-page">
+    <div id="customPageView"></div>
+  </section>
+
+  <!-- ============ SHOP ============ -->
+  <section class="page" id="page-shop">
+    <div class="section tight" style="padding-top:34px">
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>ร้านค้า</span></div>
+        <div id="coinShopBox" style="padding-top:6px"></div>
+        <div class="shop-hero" id="shopHero"></div>
+        <div class="shop-grid" id="shopGrid"></div>
+        <div id="shopContactBox" style="margin-top:46px">
+          <div class="sec-head reveal" style="margin-bottom:22px">
+            <div class="kicker">Get in touch</div>
+            <h2 id="contactHeading">ช่องทางติดต่อ · 联系我们</h2>
+            <p id="contactIntro">สอบถามเรื่องสินค้า การสั่งซื้อ หรือสื่อการเรียนเพิ่มเติม</p>
+          </div>
+          <div class="contact-grid" id="contactGrid"></div>
+          <div style="margin-top:26px" id="shopSocialWrap">
+            <h4 class="social-heading" id="shopSocialHeading"
+                style="font-size:13.5px;color:var(--brown-3);margin-bottom:14px;font-weight:700;font-family:var(--ff-cn)">ติดตามเราได้ที่ · 关注我们</h4>
+            <div class="social-row" id="socialRowShop"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCANNER (OCR) ============ -->
+  <section class="page" id="page-scan">
+    <div class="section tight" style="padding-top:34px">
+      <div class="wrap">
+        <div id="scanView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREMIUM ============ -->
+  <section class="page" id="page-premium">
+    <div class="section tight" style="padding-top:34px">
+      <div class="wrap">
+        <div class="breadcrumb"><a onclick="go('home')">หน้าแรก</a> <span class="sep">›</span> <span>สมาชิกพรีเมียม</span></div>
+        <div id="premiumView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOGIN / REGISTER ============ -->
+  <section class="page" id="page-login">
+    <div class="section">
+      <div class="wrap">
+        <div id="loginView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROFILE / PROGRESS ============ -->
+  <section class="page" id="page-profile">
+    <div class="section">
+      <div class="wrap">
+        <div id="profileView"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADMIN ============ -->
+  <section class="page" id="page-admin">
+    <div class="section">
+      <div id="adminRoot"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <div class="logo"><img src="assets/logo-why-chinese.png?v=20260101ad" alt="为什么中文"></div>
+          <div><strong>为什么中文</strong><span>Wèi shénme Zhōngwén</span></div>
+        </div>
+        <p id="footAbout">เรียนภาษาจีนด้วยคำถาม — คอร์สพินอิน ข้อสอบจำลอง HSK 1–6 เขียนอักษรจีนพร้อมลำดับขีด บทความสั้น และเกมแบบด่าน</p>
+        <p style="font-size:12px;color:var(--text-3);margin-top:10px">ข้อมูลอักษรจีนและลำดับขีดอ้างอิง 通用规范汉字表<br>และมาตรฐาน 笔顺规范 กระทรวงศึกษาธิการแห่งสาธารณรัฐประชาชนจีน</p>
+      </div>
+      <div>
+        <h4>เรียน</h4>
+        <a onclick="go('learn')">เริ่มเรียน &amp; พินอิน</a>
+        <a onclick="go('pinyin')">คอร์สพินอิน</a>
+        <a onclick="go('hsk')">HSK · คำศัพท์ &amp; ข้อสอบ</a>
+        <a onclick="go('chars')">อักษรจีน &amp; ลำดับขีด</a>
+        <a onclick="go('articles')">บทความสั้น</a>
+      </div>
+      <div>
+        <h4>เล่น &amp; วัดผล</h4>
+        <a onclick="go('exams')">ข้อสอบจำลอง HSK</a>
+        <a onclick="go('games')">เกมภาษา</a>
+        <a onclick="go('chars')">ฝึกเขียนอักษร</a>
+        <a onclick="go('premium')">สมาชิกพรีเมียม</a>
+      </div>
+      <div>
+        <h4>บัญชี</h4>
+        <a onclick="go('profile')">ความก้าวหน้าของฉัน</a>
+        <a onclick="go('login')">สมัครสมาชิก</a>
+        <a onclick="go('shop')">ร้านค้า</a>
+      </div>
+      <div>
+        <h4>ติดต่อเรา · 联系我们</h4>
+        <div id="footContact" style="display:grid;gap:2px"></div>
+        <div style="display:grid;gap:2px">
+          <b style="font-size:13px;color:var(--brown-3)">ผู้ดูแลเว็บ</b>
+          <a onclick="go('admin')" style="font-size:11.5px;color:var(--text-3);cursor:pointer">เข้าสู่ระบบผู้ดูแล</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="socialWrap" style="margin-bottom:30px">
+      <h4 class="social-heading"
+          style="font-size:13.5px;color:var(--brown-3);margin-bottom:14px;font-weight:700;font-family:var(--ff-cn)">ติดตามเราได้ที่ · 关注我们</h4>
+      <div class="social-row" id="socialRow"></div>
+    </div>
+
+    <div class="foot-bottom">
+      <span id="footCopy">© 2025 为什么中文 · Wèi shénme Zhōngwén</span>
+      <span id="footTagline">สู้ ๆ และเรียนภาษาจีนไปด้วยกัน · 加油！</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- character detail modal -->
+<div class="modal-mask" id="charModal" onclick="if(event.target===this)closeCharModal()">
+  <div class="modal" id="charModalBody"></div>
+</div>
+
+<!-- ==================== DATA ==================== -->
+<script src="assets/data/chars.js?v=20260101ad"></script>
+<script src="assets/data/hsk.js?v=20260101ad"></script>
+<script src="assets/data/hsk2.js?v=20260101ad"></script>
+<script src="assets/data/hsk3.js?v=20260101ad"></script>
+<script src="assets/data/custom.js?v=20260101ad"></script>
+<script src="assets/data/cats.js?v=20260101ad"></script>
+<script src="assets/data/articles.js?v=20260101ad"></script>
+<script src="assets/data/articles2.js?v=20260101ad"></script>
+<script src="assets/data/games.js?v=20260101ad"></script>
+<script src="assets/data/strokes.js?v=20260101ad"></script>
+<script src="assets/data/components.js?v=20260101ad"></script>
+<script src="assets/data/tests.js?v=20260101ad"></script>
+<script src="assets/data/testextra.js?v=20260101ad"></script>
+<script src="assets/data/testextra2.js?v=20260101ad"></script>
+<script src="assets/data/testextra3.js?v=20260101ad"></script>
+<script src="assets/data/history.js?v=20260101ad"></script>
+<script src="assets/data/dlgdata.js?v=20260101ad"></script>
+
+<!-- ==================== APP ==================== -->
+<script src="assets/icons.js?v=20260101ad"></script>
+<script src="assets/app.js?v=20260101ad"></script>
+<script src="assets/views.js?v=20260101ad"></script>
+<script src="assets/games.js?v=20260101ad"></script>
+<script src="assets/account.js?v=20260101ad"></script>
+<script src="assets/payment.js?v=20260101ad"></script>
+<script src="assets/pinyin.js?v=20260101ad"></script>
+<script src="assets/writing.js?v=20260101ad"></script>
+<script src="assets/tests.js?v=20260101ad"></script>
+<script src="assets/scan.js?v=20260101ad"></script>
+<script src="assets/compbuild.js?v=20260101ad"></script>
+<script src="assets/typing.js?v=20260101ad"></script>
+<script src="assets/history.js?v=20260101ad"></script>
+<script src="assets/dialogues.js?v=20260101ad"></script>
+<script src="assets/curriculum.js?v=20260101ad"></script>
+<script src="assets/supabase-config.js?v=20260101ad"></script>
+<script src="assets/supabase.js?v=20260101ad"></script>
+<script src="assets/admin.js?v=20260101ad"></script>
+</body>
+</html>
