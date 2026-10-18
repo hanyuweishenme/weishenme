@@ -62,20 +62,36 @@ alter table public.profiles enable row level security;
 alter table public.site_config enable row level security;
 alter table public.payments enable row level security;
 
+-- 5b. สิทธิ์พื้นฐาน (Supabase รุ่นใหม่ไม่ grant ให้อัตโนมัติ — จำเป็น!)
+grant usage on schema public to anon, authenticated;
+grant select on public.profiles to anon, authenticated;
+grant insert, update on public.profiles to authenticated;
+grant select on public.site_config to anon, authenticated;
+grant select, insert, update on public.payments to authenticated;
+
+drop policy if exists "profiles_read" on public.profiles;
 create policy "profiles_read" on public.profiles for select using (true);
+drop policy if exists "profiles_own_update" on public.profiles;
 create policy "profiles_own_update" on public.profiles for update
   using (auth.uid() = id or exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
+drop policy if exists "profiles_own_insert" on public.profiles;
 create policy "profiles_own_insert" on public.profiles for insert with check (auth.uid() = id);
 
+drop policy if exists "config_read" on public.site_config;
 create policy "config_read" on public.site_config for select using (true);
+drop policy if exists "config_admin_update" on public.site_config;
 create policy "config_admin_update" on public.site_config for update
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
+drop policy if exists "config_admin_insert" on public.site_config;
 create policy "config_admin_insert" on public.site_config for insert
   with check (exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
 
+drop policy if exists "payments_read_own" on public.payments;
 create policy "payments_read_own" on public.payments for select
   using (auth.uid() = user_id or exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
+drop policy if exists "payments_insert_own" on public.payments;
 create policy "payments_insert_own" on public.payments for insert with check (auth.uid() = user_id);
+drop policy if exists "payments_admin_update" on public.payments;
 create policy "payments_admin_update" on public.payments for update
   using (exists (select 1 from public.profiles p where p.id = auth.uid() and p.is_admin));
 

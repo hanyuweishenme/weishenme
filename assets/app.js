@@ -1234,6 +1234,33 @@ function ensureData(){
   return DB;
 }
 
+/* ป๊อปอัปต้อนรับ — แสดงครั้งแรกที่เปิดหน้าแรก (จำว่าเคยเห็นแล้ว) */
+function showWelcomePopup(){
+  try{
+    if(store.get('wszw_welcomed')) return;
+    if(route.page !== 'home') return;
+    store.set('wszw_welcomed', '1');
+    setTimeout(function(){
+      if(typeof glassPop !== 'function') return;
+      glassPop({
+        icon:'sparkles',
+        title:'ยินดีต้อนรับสู่ 为什么中文',
+        body:`<p style="font-size:13.5px;color:var(--text-2);line-height:1.9;margin:0;text-align:left">
+          เรียนภาษาจีนครบทุกอย่างในที่เดียว:<br>
+          · ข้อสอบจำลอง HSK 1–6 เสมือนจริง<br>
+          · บทความ บทสนทนา และประวัติศาสตร์จีน 100+ เรื่อง<br>
+          · เกมพิมพ์อักษรจีน 200 ด่าน + ธีม 8-bit<br>
+          · สแกนอักษรจีนด้วย AI<br><br>
+          <b style="color:var(--red)">เริ่มเรียนได้เลยวันนี้ — ฟรี!</b></p>`,
+        actions:[
+          {label:'เริ่มเรียนเลย', cls:'btn-primary', fn:function(){ closeGlassPop(); go('learn'); }},
+          {label:'ดูทีหลัง', cls:'btn-ghost', fn:function(){ closeGlassPop(); }}
+        ]
+      });
+    }, 900);
+  }catch(e){}
+}
+
 function init(){
   buildAncients();
   ensureData();
@@ -1269,6 +1296,7 @@ function init(){
   if(el) el.classList.add('active');
   renderRoute();
   observeReveals();
+  showWelcomePopup();
 }
 
 document.addEventListener('DOMContentLoaded', init);

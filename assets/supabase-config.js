@@ -1,7 +1,5 @@
 /* ==========================================================================
-   为什么中文 · การตั้งค่า Supabase (ใส่ URL + anon key ของโปรเจกต์คุณที่นี่)
-   ดูวิธีเอา URL/key: Supabase Dashboard → Project Settings → API
-   ถ้าปล่อยว่างไว้ — เว็บทำงานแบบปกติ (ออฟไลน์/export)
+   为什么中文 · การตั้งค่า Supabase (ใหม่: sb_publishable key)
    ========================================================================== */
 window.WC_SUPABASE = {
   url: 'https://okestkhvtkhoeqjfsnct.supabase.co',
