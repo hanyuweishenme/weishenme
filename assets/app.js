@@ -1021,6 +1021,13 @@ function renderNavMenu(){
    7. REVEAL ON SCROLL
    ========================================================================== */
 let io = null;
+let __revealFallback = null, __rvScroll = false;
+function revealInView(){
+  $$('.reveal:not(.in)').forEach(function(el){
+    const r = el.getBoundingClientRect();
+    if(r.top < (window.innerHeight || 800) - 20 && r.bottom > 0) el.classList.add('in');
+  });
+}
 function observeReveals(){
   if(!io){
     io = new IntersectionObserver(es=>{
@@ -1028,6 +1035,18 @@ function observeReveals(){
     }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
   }
   $$('.reveal:not(.in)').forEach(el => io.observe(el));
+  /* กันพลาด (เบราว์เซอร์ที่ IO ไม่ทำงาน): บังคับเปิดของที่อยู่ในจอเสมอ */
+  clearTimeout(__revealFallback);
+  __revealFallback = setTimeout(function(){
+    revealInView();
+    if(!__rvScroll){
+      __rvScroll = true;
+      window.addEventListener('scroll', function(){
+        clearTimeout(__revealFallback);
+        __revealFallback = setTimeout(revealInView, 150);
+      }, {passive:true});
+    }
+  }, 1000);
 }
 
 /* ==========================================================================
@@ -1266,7 +1285,12 @@ function init(){
   ensureData();
   /* เปิดเลเยอร์ Supabase (ถ้าตั้งค่าไว้) — โหลด config คลาวด์ + สมัคร realtime */
   if(typeof sbConfigured === 'function' && sbConfigured() && typeof sbInit === 'function'){
-    sbInit().then(function(){ if(typeof renderRoute === 'function'){ try{ renderRoute(); }catch(e){} } });
+    sbInit().then(function(){
+      if(typeof renderRoute === 'function'){
+        try{ renderRoute(); }catch(e){}
+        try{ observeReveals(); }catch(e){}
+      }
+    });
   }
   if('speechSynthesis' in window){
     pickZhVoice();

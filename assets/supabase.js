@@ -52,9 +52,12 @@ function sbSetupRealtime(c){
           DB.itemCfg = value && typeof value === 'object' ? value : {articles:{}, games:{}};
           toast('⚡ ผู้ดูแลเว็บอัปเดตการตั้งค่าเนื้อหาแล้ว');
         }
-        /* รีเรนเดอร์หน้าปัจจุบัน */
+        /* รีเรนเดอร์หน้าปัจจุบัน + เปิดอนิเมชัน reveal ใหม่ */
         try{
           if(typeof renderRoute === 'function') renderRoute();
+        }catch(e){}
+        try{
+          if(typeof observeReveals === 'function') observeReveals();
         }catch(e){}
       }catch(e){}
     })
