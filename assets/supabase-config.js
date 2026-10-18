@@ -4,6 +4,6 @@
    ถ้าปล่อยว่างไว้ — เว็บทำงานแบบปกติ (ออฟไลน์/export)
    ========================================================================== */
 window.WC_SUPABASE = {
-  url: '',        /* เช่น https://xxxx.supabase.co */
-  anonKey: ''     /* anon public key */
+  url: 'https://okestkhvtkhoeqjfsnct.supabase.co',
+  anonKey: 'sb_publishable_kf_iJXhIm1uwsSUeqY2Yfw_Czze5dfb'
 };
