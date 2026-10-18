@@ -84,6 +84,11 @@ function adminTabs(){
 }
 function adminAuth(){
   const a = DB.auth || {};
+  /* เมื่อเชื่อมต่อคลาวด์แล้ว — ค่าเริ่มต้น admin/admin123 ถูกปิดใช้งาน
+     (ต้องตั้งบัญชีผู้ดูแลเองใน ตั้งค่า หรือล็อกอินผ่านคลาวด์) */
+  if(typeof sbConfigured === 'function' && sbConfigured() && !a.email && !a.user && !a.pwd){
+    return {email:'__disabled__', pwd:'__disabled__'};
+  }
   return {email: String(a.email || a.user || 'admin'), pwd: String(a.pwd || 'admin123')};
 }
 function adminLoginView(){
@@ -113,7 +118,7 @@ function doAdminLogin(){
   } else if(typeof sbConfigured === 'function' && sbConfigured()){
     /* ล็อกอินคลาวด์ (Supabase) — แอดมินคือผู้ใช้ที่ is_admin = true */
     sbSignIn(u, p).then(function(res){
-      if(res && res.error){ toast('อีเมลหรือรหัสผ่านไม่ถูกต้อง'); return; }
+      if(res && res.error){ toast('คลาวด์: ' + (res.error.message || 'อีเมลหรือรหัสผ่านไม่ถูกต้อง')); return; }
       sbCheckAdmin().then(function(isAdm){
         if(isAdm){
           adminIn = true;
